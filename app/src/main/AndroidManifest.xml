@@ -21,6 +21,7 @@
 
         <activity android:name=".NormalPermissionActivity"/>
         <activity android:name=".PermissionsDispatcherActivity"/>
+        <activity android:name=".WrapPermissionsActivity"/>
     </application>
 
 </manifest>
