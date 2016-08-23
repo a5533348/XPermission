@@ -45,15 +45,14 @@ public class XPermissionActivity extends AppCompatActivity {
 
         if (mHandler == null) return;
 
-        if (PermissionUtils.getTargetSdkVersion(this) < 23 && !PermissionUtils.hasSelfPermissions(this, permissions)) {
-            mHandler.onDenied();
-            return;
-        }
+//        if (PermissionUtils.getTargetSdkVersion(this) < 23 && !PermissionUtils.hasSelfPermissions(this, permissions)) {
+//            mHandler.onDenied();
+//            return;
+//        }
 
         if (PermissionUtils.verifyPermissions(grantResults)) {
             mHandler.onGranted();
         } else {
-
             if (!PermissionUtils.shouldShowRequestPermissionRationale(this, permissions)) {
                 if (!mHandler.onNeverAsk()) {
                     Toast.makeText(this, "权限已被拒绝,请在设置-应用-权限中打开", Toast.LENGTH_SHORT).show();
