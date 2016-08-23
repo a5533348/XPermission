@@ -1,6 +1,5 @@
 package cn.xdeveloper.xpermission;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -10,9 +9,6 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.PermissionChecker;
 import android.support.v4.util.SimpleArrayMap;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 权限工具类，引用PermissionsDispatcher中自带
@@ -60,20 +56,6 @@ public final class PermissionUtils {
     }
 
     /**
-     * Returns true if the permission exists in this SDK version
-     *
-     * @param permission permission
-     * @return returns true if the permission exists in this SDK version
-     */
-    private static boolean permissionExists(String permission) {
-        // Check if the permission could potentially be missing on this device
-        Integer minVersion = MIN_SDK_PERMISSIONS.get(permission);
-        // If null was returned from the above call, there is no need for a device API level check for the permission;
-        // otherwise, we check if its minimum API level requirement is met
-        return minVersion == null || Build.VERSION.SDK_INT >= minVersion;
-    }
-
-    /**
      * Returns true if the Activity or Fragment has access to all given permissions.
      *
      * @param context     context
@@ -87,6 +69,20 @@ public final class PermissionUtils {
             }
         }
         return true;
+    }
+
+    /**
+     * Returns true if the permission exists in this SDK version
+     *
+     * @param permission permission
+     * @return returns true if the permission exists in this SDK version
+     */
+    private static boolean permissionExists(String permission) {
+        // Check if the permission could potentially be missing on this device
+        Integer minVersion = MIN_SDK_PERMISSIONS.get(permission);
+        // If null was returned from the above call, there is no need for a device API level check for the permission;
+        // otherwise, we check if its minimum API level requirement is met
+        return minVersion == null || Build.VERSION.SDK_INT >= minVersion;
     }
 
     /**

@@ -11,7 +11,9 @@ import android.widget.Toast;
  */
 public class XPermissionActivity extends AppCompatActivity {
 
-
+    /**
+     * 权限回调Handler
+     */
     private PermissionHandler mHandler;
 
     /**
@@ -31,7 +33,7 @@ public class XPermissionActivity extends AppCompatActivity {
 
 
     /**
-     * permissionResult callback
+     * 权限请求结果
      *
      * @param requestCode
      * @param permissions
@@ -51,6 +53,7 @@ public class XPermissionActivity extends AppCompatActivity {
         if (PermissionUtils.verifyPermissions(grantResults)) {
             mHandler.onGranted();
         } else {
+
             if (!PermissionUtils.shouldShowRequestPermissionRationale(this, permissions)) {
                 if (!mHandler.onNeverAsk()) {
                     Toast.makeText(this, "权限已被拒绝,请在设置-应用-权限中打开", Toast.LENGTH_SHORT).show();

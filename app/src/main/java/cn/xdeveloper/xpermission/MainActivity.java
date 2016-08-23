@@ -33,20 +33,20 @@ public class MainActivity extends XPermissionActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.btn_camera:
 
-                requestPermission(new String[]{Manifest.permission.CAMERA}, new PermissionHandler() {
-                    @Override
-                    public void onGranted() {
-                        Intent intent = new Intent(); //调用照相机
-                        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivity(intent);
-                    }
+                    requestPermission(new String[]{Manifest.permission.CAMERA}, new PermissionHandler() {
+                        @Override
+                        public void onGranted() {
+                            Intent intent = new Intent(); //调用照相机
+                            intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                            startActivity(intent);
+                        }
 
-                    @Override
-                    public void onDenied() {
-                        Toast.makeText(MainActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
-                    }
+                        @Override
+                        public void onDenied() {
+                            Toast.makeText(MainActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
+                        }
 
-                });
+                    });
 
                 break;
 
