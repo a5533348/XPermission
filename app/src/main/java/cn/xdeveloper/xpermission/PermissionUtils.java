@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 权限工具类，引用PermissionsDispatcher中自带的
+ * 权限工具类，引用PermissionsDispatcher中自带
  * Created by Laiyimin on 2016/8/23.
  */
 public final class PermissionUtils {
