@@ -1,8 +1,10 @@
 # XPermission 最快最简单的方式适配Android6.0权限
 
-使用方法：
-public class MainActivity extends XPermissionActivity implements View.OnClickListener {
+使用方法：继承XPermissActivity,调用requestPermission()获取权限
 
+
+
+    public class MainActivity extends XPermissionActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,9 +75,6 @@ public class MainActivity extends XPermissionActivity implements View.OnClickLis
 
                 break;
         }
+    }
     }
-
-
-}
-
 
