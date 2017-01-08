@@ -4,22 +4,6 @@
 
 
 
-    public class MainActivity extends XPermissionActivity implements View.OnClickListener {
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_normal);
-
-        findViewById(R.id.btn_camera).setOnClickListener(this);
-        findViewById(R.id.btn_call).setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_camera:
-
                     requestPermission(new String[]{Manifest.permission.CAMERA}, new PermissionHandler() {
                         @Override
                         public void onGranted() {
@@ -34,12 +18,9 @@
                         }
 
                     });
-
-                break;
-
-            case R.id.btn_call:
-
-                requestPermission(new String[]{Manifest.permission.CALL_PHONE}, new PermissionHandler() {
+                    
+                    
+                    requestPermission(new String[]{Manifest.permission.CALL_PHONE}, new PermissionHandler() {
                     @Override
                     public void onGranted() {
                         Intent intent = new Intent(Intent.ACTION_CALL);
@@ -72,9 +53,3 @@
                     }
 
                 });
-
-                break;
-        }
-    }
-    }
-
