@@ -1,8 +1,81 @@
 # XPermission 最快最简单的方式适配Android6.0权限
 
-###[Android6.0权限适配，比你想的还要简单（实践篇）](http://xdeveloper.cn/android6-0quan-xian-gua-pei-bi-ni-xiang-de-huan-yao-jian-dan-2/)  
+使用方法：
+public class MainActivity extends XPermissionActivity implements View.OnClickListener {
 
-###[[改进版]Android6.0权限适配，比你想的还要简单](http://xdeveloper.cn/gai-jin-ban-android6-0quan-xian-gua-pei-bi-ni-xiang-de-huan-yao-jian-dan/)
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_normal);
+
+        findViewById(R.id.btn_camera).setOnClickListener(this);
+        findViewById(R.id.btn_call).setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_camera:
+
+                    requestPermission(new String[]{Manifest.permission.CAMERA}, new PermissionHandler() {
+                        @Override
+                        public void onGranted() {
+                            Intent intent = new Intent(); //调用照相机
+                            intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void onDenied() {
+                            Toast.makeText(MainActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
+                        }
+
+                    });
+
+                break;
+
+            case R.id.btn_call:
+
+                requestPermission(new String[]{Manifest.permission.CALL_PHONE}, new PermissionHandler() {
+                    @Override
+                    public void onGranted() {
+                        Intent intent = new Intent(Intent.ACTION_CALL);
+                        Uri data = Uri.parse("tel:10086");
+                        intent.setData(data);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public boolean onNeverAsk() {
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setTitle("权限申请")
+                                .setMessage("在设置-应用-权限中开始电话权限，以保证功能的正常使用")
+                                .setPositiveButton("去开启", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                        intent.setData(uri);
+                                        startActivity(intent);
+
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .setNegativeButton("取消", null)
+                                .setCancelable(false)
+                                .show();
+
+                        return true;
+                    }
+
+                });
+
+                break;
+        }
+    }
+
+
+}
 
 
